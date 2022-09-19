@@ -20,7 +20,7 @@ manda llamar función imprimirClima() y devuelve true, en otro caso devuelve Fal
 """
 def consultar_cache(dic_cache, pais_key):
     if pais_key in dic_cache :
-        imprimirClima(dic_cache[pais_key])
+        #imprimirClima(dic_cache[pais_key])
         return True
     else :
         return False    
