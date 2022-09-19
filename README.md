@@ -15,5 +15,5 @@ Windows- consultar https://es.acervolima.com/como-instalar-tkinter-en-windows/
 MacOS-consultar https://www.geeksforgeeks.org/how-to-install-tkinter-on-macos/
 
 
-Se debe estar ubicado dentro de la carpeta Proyecto01, a la altura del main.py  y poner en la terminal el comando: python3 main
+Se debe estar ubicado dentro de la carpeta Proyecto01, a la altura del main.py  y poner en la terminal el comando: python3 main.py
 

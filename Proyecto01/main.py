@@ -45,26 +45,32 @@ def conCli():
         if consultar_cache(dic_cache, claAir):
             label = Label(raiz ,text=imprimirClima(dic_cache[claAir]))
             label.place(x=50, y=360)
+            reCon = ttk.Button(raiz, text="Hacer una nueva busqueda", command=label.destroy)
+            reCon.place(x=50,y=390) 
             return
         elif res.status_code!=200:
             label = Label(raiz ,text="Tu llave de OpenWeather es incorrecta.")
             label.place(x=50, y=360)
+            reCon = ttk.Button(raiz, text="Hacer una nueva busqueda", command=label.destroy)
+            reCon.place(x=50,y=390)
             return 
         elif claAir in dic_origen :
             dato = obtener_clima(dic_origen[claAir][0],dic_origen[claAir][1],claOpWe)
             guardar_cache(dic_cache, claAir, dato)
-            result(dato) 
+            result(dato)
             return
 
         elif claAir in dic_destino :
             dato = obtener_clima(dic_destino[claAir][0],dic_destino[claAir][1],claOpWe)
             guardar_cache(dic_cache, claAir, dato)
-            result(dato)
+            result(dato) 
             return 
         
         else :
             label = Label(raiz ,text="La clave del aeropuerto no sirve")
             label.place(x=50, y=360)
+            reCon = ttk.Button(raiz, text="Hacer una nueva busqueda", command=label.destroy)
+            reCon.place(x=50,y=390)
         
 
     labelCla = Label(raiz ,text="Introduce la clave del aeropuerto: ")
@@ -79,9 +85,14 @@ def conCli():
     buscar.place(x=85, y=320)
 
 
-
+#Botón para iniciar conuslta
 frm = ttk.Frame(raiz, padding=10)
 frm.place(x=85, y=70)
 p1 = ttk.Button(frm, text="Iniciar Consulta", command= conCli).grid(column=15, row=20)
+
+#Botón para finalizar programa
+frm = ttk.Frame(raiz, padding=10)
+frm.place(x=585, y=70)
+p2 = ttk.Button(frm, text="Finalizar", command= raiz.destroy).grid(column=15, row=20)
 
 raiz.mainloop()
