@@ -34,14 +34,22 @@ def result(data):
 #Método para procesar la busqueda del usuario.
 def conCli():
     def conClim():
+
         claAir = str(entry.get())
         claOpWe = str(key.get())
 
+        url ="https://api.openweathermap.org/data/2.5/weather?lat=19.3371&lon=-99.566&appid={}&units=metric".format(claOpWe)
+        res = requests.get(url)
+
+        
         if consultar_cache(dic_cache, claAir):
             label = Label(raiz ,text=imprimirClima(dic_cache[claAir]))
             label.place(x=50, y=360)
             return
-
+        elif res.status_code!=200:
+            label = Label(raiz ,text="Tu llave de OpenWeather es incorrecta.")
+            label.place(x=50, y=360)
+            return 
         elif claAir in dic_origen :
             dato = obtener_clima(dic_origen[claAir][0],dic_origen[claAir][1],claOpWe)
             guardar_cache(dic_cache, claAir, dato)
