@@ -1,3 +1,4 @@
+from ast import Break
 from importlib.metadata import entry_points
 from webbrowser import get
 from Csv import *
@@ -5,6 +6,13 @@ from cache import *
 from request import *
 from tkinter import*
 from tkinter import ttk
+
+#Definir el archivo csv
+nombre_archivo="dataset1.csv"
+
+#Método para recibir dic_origen y dic_destino a partir del csv.
+dic_origen, dic_destino= leer_csv(nombre_archivo)
+dic_cache = {}
 
 #Interfaz
 raiz=Tk()
@@ -19,16 +27,37 @@ background = Label(image = aifa, text = "Imagen S.O de fondo")
 background.place(x = 0, y = 0, relwidth = 1, relheight = 1)
 
 #Método para mostrar el resultado de la busqueda.
-def result():
-    label = Label(raiz ,text="Hola")
-    label.place(x=600, y=250)
+def result(data):
+    label = Label(raiz ,text=imprimirClima(data))
+    label.place(x=600, y=200)
 
 #Método para procesar la busqueda del usuario.
 def conCli():
     def conClim():
-        print(entry.get())
-        print(key.get())
-        result
+        claAir = str(entry.get())
+        claOpWe = str(key.get())
+
+        if consultar_cache(dic_cache, claAir):
+            label = Label(raiz ,text=imprimirClima(dic_cache[claAir]))
+            label.place(x=50, y=360)
+            return
+
+        elif claAir in dic_origen :
+            dato = obtener_clima(dic_origen[claAir][0],dic_origen[claAir][1],claOpWe)
+            guardar_cache(dic_cache, claAir, dato)
+            result(dato) 
+            return
+
+        elif claAir in dic_destino :
+            dato = obtener_clima(dic_destino[claAir][0],dic_destino[claAir][1],claOpWe)
+            guardar_cache(dic_cache, claAir, dato)
+            result(dato)
+            return 
+        
+        else :
+            label = Label(raiz ,text="La clave del aeropuerto no sirve")
+            label.place(x=50, y=360)
+        
 
     labelCla = Label(raiz ,text="Introduce la clave del aeropuerto: ")
     labelCla.place(x=50,y=200)

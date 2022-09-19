@@ -25,17 +25,19 @@ Imprime los datos pertinentes del clima.
 '''
 def imprimirClima(data):
     try:
-        temp = data["main"]["temp"]
-        vel_viento = data["wind"]["speed"]
-        latitud = data["coord"]["lat"]
-        longitud = data["coord"]["lon"]
-        descripcion = data["weather"][0]["description"]
+        temp = str(data["main"]["temp"])
+        vel_viento = str(data["wind"]["speed"])
+        latitud = str(data["coord"]["lat"])
+        longitud = str(data["coord"]["lon"])
+        descripcion = str(data["weather"][0]["description"])
         #puedes agregar los datos que quieras, hay muchos más, revisar en documentación de 
         #OpenWheater.
-        print("Temperatura: ", temp)
-        print("Velocidad del viento: {} m/s".format(vel_viento))
-        print("Latitud: {}".format(latitud))
-        print("Longitud: {}".format(longitud))
-        print("Descripción: {}".format(descripcion))
+        info_clima="Coordenadas de la ciudad: "+latitud+longitud+"\nTemperatura: "+temp+"\nVelocidad del viento: "+vel_viento+"\nDescripción general: "+descripcion
+        return info_clima
+        #print("Temperatura: ", temp)
+        #print("Velocidad del viento: {} m/s".format(vel_viento))
+        #print("Latitud: {}".format(latitud))
+        #print("Longitud: {}".format(longitud))
+        #print("Descripción: {}".format(descripcion))
     except TypeError:
         print("El parámetro data no es un JSON con la información climática.")
