@@ -33,7 +33,7 @@ lon=dic_origen['TLC'][1]
 api_key=input("Escribe tu llave: ")
 data=obtener_clima(lat,lon,api_key)
 
-imprimirClima(data)
+print(imprimirClima(data))
 
 """"
 Pruebas de cache.py
@@ -42,4 +42,5 @@ print("Empiezan pruebas cache: ")
 dic_cache={}
 print("Si encuentra en el cache la info la imprime, en otro caso no hace nada")
 guardar_cache(dic_cache,'TLC',data)
-consultar_cache(dic_cache,'TLC')
+if consultar_cache(dic_cache,'TLC'):
+    print(imprimirClima(dic_cache['TLC']))
