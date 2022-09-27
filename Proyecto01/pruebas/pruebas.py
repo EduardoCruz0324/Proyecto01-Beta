@@ -1,6 +1,6 @@
-from Csv import *
-from request import *
-from cache import *
+from src.baseDeDatos import *
+from src.request import *
+from src.cache import *
 """
 Al ejecutar este programa se prueban las funciones que se 
 crearon para el buen funcionamiento de Csv.py

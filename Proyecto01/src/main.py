@@ -1,14 +1,15 @@
 from ast import Break
 from importlib.metadata import entry_points
 from webbrowser import get
-from Csv import *
+from baseDeDatos import *
 from cache import *
 from request import *
 from tkinter import*
 from tkinter import ttk
+import os
 
 #Definir el archivo csv
-nombre_archivo="dataset1.csv"
+nombre_archivo="Proyecto01/RecursosExtra/dataset1.csv"
 
 #Método para recibir dic_origen y dic_destino a partir del csv.
 dic_origen, dic_destino= leer_csv(nombre_archivo)
@@ -22,7 +23,7 @@ raiz.geometry("960x540")
 #raiz.config(bg="red")
 
 #Fondo de la interfaz
-aifa = PhotoImage(file="aifa.png")
+aifa = PhotoImage(file="Proyecto01/imagenes/aifa.png")
 background = Label(image = aifa, text = "Imagen S.O de fondo")
 background.place(x = 0, y = 0, relwidth = 1, relheight = 1)
 

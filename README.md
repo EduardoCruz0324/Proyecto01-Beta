@@ -10,10 +10,10 @@ Correr el proyecto:
 Requerimientos:
 -Tener instalado Python3 revisar en https://www.python.org/downloads/
 -Tener el modulo Tkinter 
-Distribuciones linux - correr Sudo apt-get install python3-tk
+Distribuciones linux - correr: & Sudo apt-get install python3-tk
 Windows- consultar https://es.acervolima.com/como-instalar-tkinter-en-windows/
 MacOS-consultar https://www.geeksforgeeks.org/how-to-install-tkinter-on-macos/
 
 
-Se debe estar ubicado dentro de la carpeta Proyecto01, a la altura del main.py  y poner en la terminal el comando: python3 main.py
+Se debe estar ubicado dentro de la carpeta Proyecto01-Beta, a la altura de la carpeta Proyecto01, del pdf y del readme, luego ejecutar en la terminal el comando: $ python3 Proyecto01/src/main.py
 
