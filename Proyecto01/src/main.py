@@ -3,7 +3,7 @@ from importlib.metadata import entry_points
 from webbrowser import get
 from baseDeDatos import *
 from cache import *
-from request import *
+from solicitud import *
 from tkinter import*
 from tkinter import ttk
 import os

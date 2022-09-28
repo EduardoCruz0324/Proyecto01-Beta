@@ -1,5 +1,5 @@
 from src.baseDeDatos import *
-from src.request import *
+from src.solicitud import *
 from src.cache import *
 """
 Al ejecutar este programa se prueban las funciones que se 
@@ -11,7 +11,7 @@ Pruebas de Csv.py
 """
 print("Empiezan pruebas Csv: ")
 #Definir el archivo csv
-nombre_archivo="dataset1.csv"
+nombre_archivo="Proyecto01/RecursosExtra/dataset1.csv"
 
 #Método para recibir dic_origen y dic_destino a partir del csv.
 dic_origen, dic_destino= leer_csv(nombre_archivo)
