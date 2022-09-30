@@ -6,7 +6,7 @@ class solicitud():
 
     def __init__(self):
         """Método constructor que define que el objeto tendrá como atributos una url y una llave."""
-        self.url=""
+        self.url="https://api.openweathermap.org/data/2.5/weather?lat={}&lon={}&appid={}&units=metric"
         self.llave=""
         
 
@@ -23,17 +23,15 @@ class solicitud():
     def obtener_clima(self):
         """Método para hacer la solicitud a la red con los atributos almacenados en el objeto.
         Devuelve un string con la información  climática."""
-        try:
-            res = requests.get(self.url)
-            if res.status_code==200:
-                data = res.json()
-                info_clima=imprimirClima(data)
-                return info_clima
-            else :
-                raise KeyError
-        except KeyError:
+        res = requests.get(self.url)
+        if res.status_code==200:
+            data = res.json()
+            info_clima=imprimirClima(data)
+            return info_clima
+        else :
             msg="Algo salió mal... la llave proporcionada ó las coordenadas de la ciudad son incorrectas."
-            print(msg)
+            return msg
+
 
 def imprimirClima(data):
     """Funcion auxiliar para procesar un objeto JSON con la información climática y 
