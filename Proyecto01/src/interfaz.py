@@ -41,7 +41,7 @@ class Interfaz():
         boton1.place(x=50, y=320)
         self.elementos.agregar_boton("consultar", boton1)
         boton2 = Button(self.raiz, text="Reiniciar consultas", command=self.reiniciar).place(x=210 ,y= 320)
-        self.elementos.agregar_boton("reiniciar", boton2)
+        self.elementos.agregar_boton("reiniciar consultas", boton2)
         boton3 = Button(self.raiz, text="Finalizar", command=self.raiz.destroy).place(x=700, y=320)
         self.elementos.agregar_boton("finalizar", boton3)
         #Entrys
@@ -91,5 +91,5 @@ class Interfaz():
             return
 
     def reiniciar(self):
-        pass
+        self.cache.borrar_cache()
 
