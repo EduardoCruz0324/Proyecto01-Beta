@@ -67,8 +67,8 @@ class Interfaz():
 
         self.solicitudes.recibir_llave(llaveProporcionada)
         if ciudadProporcionada in self.baseDatos.dic_origen:
+            self.solicitudes.crear_url(self.baseDatos.dic_origen[ciudadProporcionada][0],self.baseDatos.dic_origen[ciudadProporcionada][1])
             if self.solicitudes.obtener_clima():
-                self.solicitudes.crear_url(self.baseDatos.dic_origen[ciudadProporcionada][0],self.baseDatos.dic_origen[ciudadProporcionada][1])
                 dato = self.solicitudes.obtener_clima()
                 self.cache.guardar_cache(ciudadProporcionada,dato)
                 self.result()
@@ -77,8 +77,8 @@ class Interfaz():
                 self.elementos.textos['coordenadas'].configure(text="Error con la llave proporcionada")
                 return
         elif ciudadProporcionada in self.baseDatos.dic_destino:
-            if self.solicitudes.obtener_clima != False:
-                self.solicitudes.crear_url(self.baseDatos.dic_destino[0],self.baseDatos.dic_destino[1])
+            self.solicitudes.crear_url(self.baseDatos.dic_destino[0],self.baseDatos.dic_destino[1])
+            if self.solicitudes.obtener_clima :
                 dato = self.solicitudes.obtener_clima()
                 self.cache.guardar_cache(ciudadProporcionada,dato)
                 self.result()

@@ -25,6 +25,7 @@ class solicitud():
         Devuelve un string con la información  climática."""
         res = requests.get(self.url)
         if res.json()['cod']==200:
+            print("entre a if de obtener clima")
             data = res.json()
             info_clima=obtenerInformacionClimatica(data)
             return info_clima
