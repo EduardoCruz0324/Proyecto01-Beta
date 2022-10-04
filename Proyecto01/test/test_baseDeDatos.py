@@ -7,6 +7,7 @@ from src.baseDeDatos import *
 class test_baseDeDatos(unittest.TestCase):
     
     def test__init__(self):
+        """Método que nos sirve para probar si podemos crear una base de datos."""
         base=baseDeDatos()
         dic={}
         self.assertIsInstance(base,baseDeDatos)
@@ -14,6 +15,7 @@ class test_baseDeDatos(unittest.TestCase):
         self.assertEqual(base.dic_destino,dic)
 
     def test_leer_datos(self):
+        """Método que nos sirve para probar si podemos leer la base de datos ya creada."""
         base=baseDeDatos()
         base.leer_datos("Proyecto01/RecursosExtra/dataset1.csv")
         dic1={'TLC':['19.3371', '-99.566'],'MTY':['25.7785', '-100.107'], 'MEX':['19.4363', '-99.0721'], 'TAM': ['22.2964', '-97.8659'], 'GDL': ['20.5218', '-103.311'], 'CJS': ['31.6361', '-106.429'], 'CUN': ['21.0365', '-86.8771'], 'TIJ': ['32.5411', '-116.97'], 'HMO': ['29.0959', '-111.048'], 'CME': ['18.6537', '-91.799'], 'MID': ['20.937', '-89.6577'], 'CTM': ['18.5047', '-88.3268'], 'VER': ['19.1459', '-96.1873'], 'OAX': ['16.9999', '-96.7266'], 'HUX': ['15.7753', '-96.2626'], 'PVR': ['20.6801', '-105.254'], 'PXM': ['15.8769', '-97.0891'], 'ACA': ['16.7571', '-99.754'], 'ZIH': ['17.6016', '-101.461'], 'AGU': ['21.7056', '-102.318'], 'VSA': ['17.997', '-92.8174'], 'CZM': ['20.5224', '-86.9256'], 'CUU': ['28.7029', '-105.965'], 'TRC': ['25.5683', '-103.411'], 'QRO': ['20.6173', '-100.186'], 'BJX': ['20.9935', '-101.481'], 'PBC': ['19.1581', '-98.3714'], 'SLP': ['22.2543', '-100.931'], 'ZCL': ['22.8971', '-102.687']}

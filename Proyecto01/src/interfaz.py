@@ -4,19 +4,24 @@ from cache import cache
 from solicitud import solicitud
 from tkinter import Tk, PhotoImage, Label, Button, Entry
 class Elementos():
+    """Clase que se encarga de componer los elementos para realizar la interfaz."""
     textos: dict[str, tkinter.Label] = {}
     botones: dict[str, tkinter.Button] = {}
     formas: dict[str, tkinter.Entry] = {}
     def __init__(self):
         pass
     def agregar_boton(self, name: str, boton: tkinter.Button):
+        """Método que nos permité agregar botones."""
         self.botones[name] = boton
     def agregar_forma(self, name: str, forma: tkinter.Entry):
+        """Método que nos permité agregar entradas."""
         self.formas[name] = forma
     def agregar_texto(self, name: str, forma: tkinter.Label):
+        """Método que nos permité agregar cuadros de texto."""
         self.textos[name] = forma
 
 class Interfaz():
+    """Clase que se encarga de darle forma al proyecto a traves de una interfaz."""
     solicitudes = solicitud()
     cache = cache()
     baseDatos = baseDeDatos()
@@ -24,6 +29,8 @@ class Interfaz():
     elementos = Elementos()
 
     def __init__(self):
+        """Método que hace que podamos crear la interfaz, utilizando Tkinter, partiendo de una raíz con una
+        imagén de fondo y dando funciones a los botones que se muestran en la interfaz."""
         self.raiz=Tk()
         self.raiz.title("Bienvenidos al AIFA")
         self.raiz.geometry("960x540")
@@ -54,9 +61,15 @@ class Interfaz():
         print(entrada_llave)
     
     def result(self):
+        """Método el cual no arroja el resultado de la busqueda que el usuario
+        desea hacer."""
         self.elementos.textos['coordenadas'].configure(text=self.solicitudes.obtener_clima())
 
     def consultar_clima(self):
+        """Método que consulta el clima basandose en la clave de la ciudad proporcionada por el usuario
+        y por la llave de la API que también será proporcionada por el usuario, partiendo de esto, este método
+        checa las anteriores entradas que se han registrado en el cache para así poder realizar más busquedas 
+        desde la API."""
         ciudadProporcionada = str(self.elementos.formas["entrada_ciudad"].get()).upper()
         llaveProporcionada = str(self.elementos.formas["entrada_llave"].get())
         self.solicitudes.recibir_llave(llaveProporcionada)
@@ -91,5 +104,7 @@ class Interfaz():
             return
 
     def reiniciar(self):
+        """Método que funciona para poder reiniciar las consultas."""
         self.cache.borrar_cache()
+        
 
