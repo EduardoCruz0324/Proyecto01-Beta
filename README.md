@@ -36,3 +36,10 @@ Se debe estar ubicado dentro de la carpeta Proyecto01-Beta, a la altura de la ca
 
     $ python3 Proyecto01/src/main.py
 
+Referencias:
+    Para crear Base De Datos se consultó :
+        Leer archivo CSV con Python. (2020, 9 noviembre). Parzibyte's blog. Recuperado 3 de octubre de 2022, de https://parzibyte.me/blog/2020/11/09/leer-archivo-csv-python/
+    
+    Para realizar las pruebas se consultó :
+        unittest — Unit testing framework — Python 3.10.7 documentation. (s. f.). Recuperado 3 de octubre de 2022, de https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertRaises
+
