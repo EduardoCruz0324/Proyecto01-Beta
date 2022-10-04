@@ -36,6 +36,17 @@ Se debe estar ubicado dentro de la carpeta Proyecto01-Beta, a la altura de la ca
 
     $ python3 Proyecto01/src/main.py
 
+Para correr las pruebas se tiene que estar ubicado dentro de la carpeta Proyecto01-Beta, a la altura de la carpeta Proyecto01, del pdf y del readme, luego ejecutar los siguientes comandos:
+
+    $ python3 Proyecto01/test/test_solicitud.py 
+    $ python3 Proyecto01/test/test_baseDeDatos.py 
+    $ python3 Proyecto01/test/test_solicitud.py 
+    Para correr cache se necesita remplazar  en el archivo cache.py la linea 1 por:
+    from src.solicitud import *
+    despues correr el siguiente comando:
+    $ python3 Proyecto01/test/test_cache.py 
+    "NOTA: se deja sin este import porque no lograria reconocer el modulo al momento de correr el main. :(
+        
 Referencias:
     Para crear Base De Datos se consultó :
         Leer archivo CSV con Python. (2020, 9 noviembre). Parzibyte's blog. Recuperado 3 de octubre de 2022, de https://parzibyte.me/blog/2020/11/09/leer-archivo-csv-python/

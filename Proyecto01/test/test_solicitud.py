@@ -35,31 +35,17 @@ class test_solicitud(unittest.TestCase):
     def test_obtener_clima(self):
         """Método que nos sirve para probar si se nos puede devolver el clima de alguna ciudad."""
         solicitud1=solicitud()
-        self.assertEqual(solicitud1.obtener_clima(),"Algo salió mal... la llave proporcionada ó las coordenadas de la ciudad son incorrectas.")
+        self.assertEqual(solicitud1.obtener_clima(),False)
         solicitud1.crear_url(4,3)
-        self.assertEqual(solicitud1.obtener_clima(),"Algo salió mal... la llave proporcionada ó las coordenadas de la ciudad son incorrectas.")
+        self.assertEqual(solicitud1.obtener_clima(),False)
         solicitud1.recibir_llave("hola")
-        self.assertEqual(solicitud1.obtener_clima(),"Algo salió mal... la llave proporcionada ó las coordenadas de la ciudad son incorrectas.")
+        self.assertEqual(solicitud1.obtener_clima(),False)
 
-    def test_imprimir_clima(self):
+    def test_obtener_informacion_climatica(self):
         """Método que nos sirve para probar si se puede imprimir el clima de alguna ciudad consultada."""
         data={'coord': {'lon': 10.99, 'lat': 44.34}, 'weather': [{'id': 804, 'main': 'Clouds', 'description': 'overcast clouds', 'icon': '04n'}], 'base': 'stations', 'main': {'temp': 11.52, 'feels_like': 10.97, 'temp_min': 8.66, 'temp_max': 12.41, 'pressure': 1004, 'humidity': 86, 'sea_level': 1004, 'grnd_level': 919}, 'visibility': 10000, 'wind': {'speed': 2.68, 'deg': 200, 'gust': 4.33}, 'clouds': {'all': 96}, 'dt': 1664504673, 'sys': {'type': 2, 'id': 2004688, 'country': 'IT', 'sunrise': 1664514732, 'sunset': 1664557192}, 'timezone': 7200, 'id': 3163858, 'name': 'Zocca', 'cod': 200}
         info_clima="Coordenadas de la ciudad: Latitud: 44.34 Longitud: 10.99\nTemperatura: 11.52\nVelocidad del viento: 2.68\nDescripción general: overcast clouds"
-        self.assertEqual(imprimirClima(data),info_clima)
+        self.assertEqual(obtenerInformacionClimatica(data),info_clima)
 
 if __name__ == '__main__':
     unittest.main()
-"""
-solicitud=solicitud()
-
-solicitud.recibir_llave("llave")
-
-print(solicitud.llave)
-
-solicitud.crear_url(44.34,10.99)
-print(solicitud.url)
-
-print(solicitud.obtener_clima())
-
-help(solicitud)
-help(imprimirClima)"""

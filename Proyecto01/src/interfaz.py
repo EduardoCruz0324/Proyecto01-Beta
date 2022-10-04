@@ -36,14 +36,12 @@ class Interfaz():
         self.raiz.geometry("960x540")
         self.raiz.resizable(0,0)
         self.aifa = PhotoImage(file="Proyecto01/imagenes/aifa.png")
-        # Set Labels insight interfaz
         Label(self.raiz,image=self.aifa).place(x = 0, y = 0, relwidth = 1, relheight = 1)
         Label(self.raiz ,text="Clave de la ciudad: ").place(x=75,y=200)
         Label(self.raiz ,text="Llave de OpenWeather:").place(x=50,y=260)
         texto_coordenadas = Label(self.raiz ,text="")
         texto_coordenadas.place(x=450, y=200)
         self.elementos.agregar_texto("coordenadas", texto_coordenadas)
-        # Botones
         boton1 = Button(self.raiz, text="Consultar Clima", command=self.consultar_clima)
         boton1.place(x=50, y=320)
         self.elementos.agregar_boton("consultar", boton1)
@@ -51,14 +49,12 @@ class Interfaz():
         self.elementos.agregar_boton("reiniciar consultas", boton2)
         boton3 = Button(self.raiz, text="Finalizar", command=self.raiz.destroy).place(x=700, y=320)
         self.elementos.agregar_boton("finalizar", boton3)
-        #Entrys
         entrada_ciudad=Entry(self.raiz)
         entrada_ciudad.place(x=210, y=200)
         self.elementos.agregar_forma("entrada_ciudad",entrada_ciudad)
         entrada_llave=Entry(self.raiz)
         entrada_llave.place(x=210,y=260)
         self.elementos.agregar_forma("entrada_llave", entrada_llave)
-        print(entrada_llave)
     
     def result(self):
         """Método el cual no arroja el resultado de la busqueda que el usuario
