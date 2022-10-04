@@ -1,5 +1,7 @@
-from solicitud import *
 import unittest
+import sys
+sys.path.append('Proyecto01')
+from src.solicitud import *
 class test_solicitud(unittest.TestCase):
     
     def test__init__(self):

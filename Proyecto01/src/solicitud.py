@@ -24,11 +24,11 @@ class solicitud():
         """Método para hacer la solicitud a la red con los atributos almacenados en el objeto.
         Devuelve un string con la información  climática."""
         res = requests.get(self.url)
-        if res.status_code==200:
+        if res.json()['cod']==200:
             data = res.json()
             info_clima=obtenerInformacionClimatica(data)
             return info_clima
-        else :
+        else:
             return False
 
 

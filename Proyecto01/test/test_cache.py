@@ -1,5 +1,8 @@
-from cache import *
+
 import unittest
+import sys
+sys.path.append('Proyecto01')
+from src.cache import *
 class test_cache(unittest.TestCase):
     
     def test__init__(self):
