@@ -26,17 +26,16 @@ class solicitud():
         res = requests.get(self.url)
         if res.status_code==200:
             data = res.json()
-            info_clima=imprimirClima(data)
+            info_clima=obtenerInformacionClimatica(data)
             return info_clima
         else :
-            msg="Algo salió mal... la llave proporcionada ó las coordenadas de la ciudad son incorrectas."
-            return msg
+            return False
 
 
-def imprimirClima(data):
+def obtenerInformacionClimatica(data):
     """Funcion auxiliar para procesar un objeto JSON con la información climática y 
     devolverla en un formato de cadena. Recibe como parámetro el JSON con la información climática
-    y devuelve una cadena con la información pertinente."""
+    y devuelve una cadena con la información climática necesaria."""
     try:
         temp = str(data["main"]["temp"])
         vel_viento = str(data["wind"]["speed"])

@@ -1,105 +1,95 @@
-from ast import Break
-from importlib.metadata import entry_points
-from turtle import title
-from webbrowser import get
-from baseDeDatos import *
-from cache import *
-from solicitud import *
-from tkinter import*
-from tkinter import ttk
-import os
+import tkinter
+from baseDeDatos import baseDeDatos
+from cache import cache
+from solicitud import solicitud
+from tkinter import Tk, PhotoImage, Label, Button, Entry
+class Elementos():
+    textos: dict[str, tkinter.Label] = {}
+    botones: dict[str, tkinter.Button] = {}
+    formas: dict[str, tkinter.Entry] = {}
+    def __init__(self):
+        pass
+    def agregar_boton(self, name: str, boton: tkinter.Button):
+        self.botones[name] = boton
+    def agregar_forma(self, name: str, forma: tkinter.Entry):
+        self.formas[name] = forma
+    def agregar_texto(self, name: str, forma: tkinter.Label):
+        self.textos[name] = forma
 
-solicitudes = solicitud()
-cache = cache()
-baseDatos = baseDeDatos()
+class Interfaz():
+    solicitudes = solicitud()
+    cache = cache()
+    baseDatos = baseDeDatos()
+    baseDatos.leer_datos("Proyecto01/RecursosExtra/dataset1.csv")
+    elementos = Elementos()
 
-class interfaz():
-    #Definir el archivo csv
-    nombre_archivo="Proyecto01/RecursosExtra/dataset1.csv"
+    def __init__(self):
+        self.raiz=Tk()
+        self.raiz.title("Bienvenidos al AIFA")
+        self.raiz.geometry("960x540")
+        self.raiz.resizable(0,0)
+        self.aifa = PhotoImage(file="Proyecto01/imagenes/aifa.png")
+        # Set Labels insight interfaz
+        Label(self.raiz,image=self.aifa).place(x = 0, y = 0, relwidth = 1, relheight = 1)
+        Label(self.raiz ,text="Clave de la ciudad: ").place(x=75,y=200)
+        Label(self.raiz ,text="Llave de OpenWeather:").place(x=50,y=260)
+        texto_coordenadas = Label(self.raiz ,text="")
+        texto_coordenadas.place(x=450, y=200)
+        self.elementos.agregar_texto("coordenadas", texto_coordenadas)
+        # Botones
+        boton1 = Button(self.raiz, text="Consultar Clima", command=self.consultar_clima)
+        boton1.place(x=50, y=320)
+        self.elementos.agregar_boton("consultar", boton1)
+        boton2 = Button(self.raiz, text="Reiniciar consultas", command=self.reiniciar).place(x=210 ,y= 320)
+        self.elementos.agregar_boton("reiniciar", boton2)
+        boton3 = Button(self.raiz, text="Finalizar", command=self.raiz.destroy).place(x=700, y=320)
+        self.elementos.agregar_boton("finalizar", boton3)
+        #Entrys
+        entrada_ciudad=Entry(self.raiz)
+        entrada_ciudad.place(x=210, y=200)
+        self.elementos.agregar_forma("entrada_ciudad",entrada_ciudad)
+        entrada_llave=Entry(self.raiz)
+        entrada_llave.place(x=210,y=260)
+        self.elementos.agregar_forma("entrada_llave", entrada_llave)
+        print(entrada_llave)
+    
+    def result(self):
+        self.elementos.textos['coordenadas'].configure(text=self.solicitudes.obtener_clima())
 
-    #Método para recibir dic_origen y dic_destino a partir del csv.
-    dic_origen, dic_destino= baseDatos.leer_datos(nombre_archivo)
-    dic_cache = {}
+    def consultar_clima(self):
+        ciudadProporcionada = str(self.elementos.formas["entrada_ciudad"].get()).upper()
+        llaveProporcionada = str(self.elementos.formas["entrada_llave"].get())
+        self.solicitudes.recibir_llave(llaveProporcionada)
 
-    #Interfaz
-    raiz=Tk()
-    raiz.title("Bienvenidos al AIFA")
-    raiz.geometry("960x540")
-    #raiz.resizable(1,1)
-    #raiz.config(bg="red")
+        if self.cache.consultar_cache(ciudadProporcionada) != False:
+            self.elementos.textos['coordenadas'].configure(text=self.cache.consultar_cache(ciudadProporcionada))
+            return
 
-    #Fondo de la interfaz
-    aifa = PhotoImage(file="Proyecto01/imagenes/aifa.png")
-    background = Label(image = aifa, text = "Imagen S.O de fondo")
-    background.place(x = 0, y = 0, relwidth = 1, relheight = 1)
-
-    #Método para mostrar el resultado de la busqueda.
-    def result(data):
-        label = Label(raiz ,text=imprimirClima(data))
-        label.place(x=600, y=200)
-
-    #Método para procesar la busqueda del usuario.
-    def conCli():
-        def conClim():
-
-            claAir = str(entry.get())
-            claOpWe = str(key.get())
-
-            url ="https://api.openweathermap.org/data/2.5/weather?lat=19.3371&lon=-99.566&appid={}&units=metric".format(claOpWe)
-            res = requests.get(url)
-
-            
-            if cache.consultar_cache(cache.dic_cache, claAir):
-                label = Label(raiz ,text=imprimirClima(cache.dic_cache[claAir]))
-                label.place(x=50, y=360)
-                reCon = ttk.Button(raiz, text="Hacer una nueva busqueda", command=label.destroy)
-                reCon.place(x=50,y=390) 
+        self.solicitudes.recibir_llave(llaveProporcionada)
+        if ciudadProporcionada in self.baseDatos.dic_origen:
+            if self.solicitudes.obtener_clima != False:
+                self.solicitudes.crear_url(self.baseDatos.dic_origen[ciudadProporcionada][0],self.baseDatos.dic_origen[ciudadProporcionada][1])
+                dato = self.solicitudes.obtener_clima()
+                self.cache.guardar_cache(ciudadProporcionada,dato)
+                self.result()
                 return
-            elif res.status_code!=200:
-                label = Label(raiz ,text="Tu llave de OpenWeather es incorrecta.")
-                label.place(x=50, y=360)
-                reCon = ttk.Button(raiz, text="Hacer una nueva busqueda", command=label.destroy)
-                reCon.place(x=50,y=390)
-                return 
-            elif claAir in baseDatos.dic_origen :
-                dato = solicitudes.obtener_clima(baseDatos.dic_origen[claAir][0],baseDatos.dic_origen[claAir][1],claOpWe)
-                cache.guardar_cache(cache.dic_cache, claAir, dato)
-                result(dato)
-                return
-
-            elif claAir in baseDatos.dic_destino :
-                dato = solicitudes.obtener_clima(baseDatos.dic_destino[claAir][0],baseDatos.dic_destino[claAir][1],claOpWe)
-                cache.guardar_cache(cache.dic_cache, claAir, dato)
-                result(dato) 
-                return 
-            
             else :
-                label = Label(raiz ,text="La clave del aeropuerto no sirve")
-                label.place(x=50, y=360)
-                reCon = ttk.Button(raiz, text="Hacer una nueva busqueda", command=label.destroy)
-                reCon.place(x=50,y=390)
-            
+                self.elementos.textos['coordenadas'].configure(text="Error con la llave proporcionada")
+                return
+        elif ciudadProporcionada in self.baseDatos.dic_destino:
+            if self.solicitudes.obtener_clima != False:
+                self.solicitudes.crear_url(self.baseDatos.dic_destino[0],self.baseDatos.dic_destino[1])
+                dato = self.solicitudes.obtener_clima()
+                self.cache.guardar_cache(ciudadProporcionada,dato)
+                self.result()
+                return
+            else :
+                self.elementos.textos['coordenadas'].configure(text="Error con la llave proporcionada")
+                return
+        else :
+            self.elementos.textos['coordenadas'].configure(text="La clave de la ciudad no sirve")
+            return
 
-        labelCla = Label(raiz ,text="Introduce la clave del aeropuerto: ")
-        labelCla.place(x=50,y=200)
-        entry = ttk.Entry(raiz)
-        entry.place(x=50, y=230)
-        labelKey = Label(raiz ,text="Introduce tu llave de OpenWeather: ")
-        labelKey.place(x=50,y=260)
-        key = ttk.Entry(raiz)
-        key.place(x=50,y=290)
-        buscar = ttk.Button(raiz, text="Buscar", command= conClim)
-        buscar.place(x=85, y=320)
+    def reiniciar(self):
+        pass
 
-
-    #Botón para iniciar conuslta
-    frm = ttk.Frame(raiz, padding=10)
-    frm.place(x=85, y=70)
-    p1 = ttk.Button(frm, text="Iniciar Consulta", command= conCli).grid(column=15, row=20)
-
-    #Botón para finalizar programa
-    frm = ttk.Frame(raiz, padding=10)
-    frm.place(x=585, y=70)
-    p2 = ttk.Button(frm, text="Finalizar", command= raiz.destroy).grid(column=15, row=20)
-
-    raiz.mainloop()
