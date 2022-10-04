@@ -4,6 +4,7 @@ from baseDeDatos import *
 class test_baseDeDatos(unittest.TestCase):
     
     def test__init__(self):
+        """Método que nos sirve para probar si podemos crear una base de datos."""
         base=baseDeDatos()
         dic={}
         self.assertIsInstance(base,baseDeDatos)
@@ -11,6 +12,7 @@ class test_baseDeDatos(unittest.TestCase):
         self.assertEqual(base.dic_destino,dic)
 
     def test_leer_datos(self):
+        """Método que nos sirve para probar si podemos leer la base de datos ya creada."""
         base=baseDeDatos()
         base2=baseDeDatos()
         base.leer_datos("Proyecto01/RecursosExtra/dataset1.csv")

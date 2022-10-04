@@ -1,14 +1,17 @@
 from cache import *
 import unittest
 class test_cache(unittest.TestCase):
+    """Clase que va a realizar las pruebas de la clase Caché"""
     
     def test__init__(self):
+        """Método que nos sirve para probar la funcionalidad del Caché"""
         cache1=cache()
         dic={}
         self.assertIsInstance(cache1,cache)
         self.assertEqual(cache1.dic_cache,dic)
 
     def test_guardar_cache(self):
+        """Método que nos sirve para observar si funciona guardar información en el Caché"""
         cache1=cache()
         cache1.guardar_cache("hola","hello")
         dic={"hola":"hello"}
@@ -18,6 +21,7 @@ class test_cache(unittest.TestCase):
         self.assertEqual(cache1.dic_cache,dic)
 
     def test_consultar_cache(self):
+        """Método que nos sirve para observar si podemos consultar información del Caché"""
         cache1=cache()
         cache1.guardar_cache("hola","hello")
         self.assertEqual(cache1.consultar_cache("hola"),"hello")
