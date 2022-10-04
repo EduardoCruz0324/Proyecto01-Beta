@@ -25,3 +25,7 @@ class cache():
             return self.dic_cache[clave_ciudad]
         else :
             return False
+
+    def borrar_cache(self):
+        """Método para eliminar todo el diccionario cache"""
+        self.dic_cache={}
