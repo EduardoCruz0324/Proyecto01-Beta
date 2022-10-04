@@ -67,7 +67,7 @@ class Interfaz():
 
         self.solicitudes.recibir_llave(llaveProporcionada)
         if ciudadProporcionada in self.baseDatos.dic_origen:
-            if self.solicitudes.obtener_clima != False:
+            if self.solicitudes.obtener_clima():
                 self.solicitudes.crear_url(self.baseDatos.dic_origen[ciudadProporcionada][0],self.baseDatos.dic_origen[ciudadProporcionada][1])
                 dato = self.solicitudes.obtener_clima()
                 self.cache.guardar_cache(ciudadProporcionada,dato)
